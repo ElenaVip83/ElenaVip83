@@ -1,0 +1,116 @@
+
+
+
+1. Найти всех пользвователей (user), которые были созданы за последниюю неделю (без привязки к "точной" дате, т.е. с отсчетом от сегодняшнего дня)
+
+SELECT
+    borrower_id,
+    u.email,
+    p.full_name
+FROM borrower
+JOIN personal_data p ON b.personal_data_id = p.id
+WHERE u.creation_date>= NOW() - INTERVAL 7 DAY; - result
+
+
+2. Найти всех заемщиков (borrower), которые были созданы за последний месяц
+
+SELECT
+    b.id AS borrower_id,
+    u.email,
+    p.full_name,
+    u.phone,
+    b. user_account_id
+FROM borrower b
+JOIN user_account u ON b.user_account_id = u.id
+JOIN personal_data p ON b.personal_data_id = p.id
+WHERE u.creation_date>= NOW() - INTERVAL 1 MONTH; - выводит данные
+
+
+3.Вывести личные данные пользователя по его емейлу: Емейл, Дата регистрации, номер телефона, фио, номер официального документа (iin)
+
+SELECT
+    u.email,
+    u.creation_date AS registration_date,
+    u.phone,
+    personal_data_full_name,
+    personal_data_passport_iin
+FROM user_account u
+JOIN borrower b ON b.user_account_id = user_account_id
+JOIN personal_data p ON b.personal_date_id = personal_data_id
+WHERE u.email = 'rozhkevitch.elena@yandex.ru';
+
+
+4. Найти ФИО по номеру телефона
+
+SELECT
+    p.full_name,
+    u.phone
+FROM user_account u
+JOIN borrower b ON b.user_account_id = u.id
+JOIN personal_data p ON b.personal_data_id = p.id
+WHERE u.phone = '+77474299149';
+
+
+
+5.Вывести все заявки на кредиты, по емейлу пользователя
+SELECT
+    c.id AS credit_id,
+    c.amount_to_pay,
+    c.status,
+    c.date_first_payment_schedule,
+    u.email
+FROM borrower b
+JOIN user_account u ON b.user_account_id = u.id
+JOIN credit c ON c.borrower_id = b.id
+WHERE u.email = 'rozhkevitch.elena@yandex.ru';
+
+
+6.Вывести количество заемщиков (борровер), по месяцам за последний год. В результирующей таблице использовать название поля “количество_заемщиков”
+
+SELECT
+    DATE_FORMAT(br.created_date, '%Y-%m') AS month,
+    COUNT(b.id) AS borrower_count
+FROM borrower b
+JOIN borrower_registration br ON br.uid = b.id
+WHERE br.created_date >= NOW() - INTERVAL 1 YEAR
+GROUP BY month
+ORDER BY month; - вывел 10 от 2024-04 
+
+
+7. Вывести количество пользователей, которые подали несколько заявок на займы за текущий месяц (т.е. не менее двух запросов на получение займа)
+SELECT
+    COUNT(*) AS users_with_multiple_applications
+FROM (
+    SELECT
+        u.id
+    FROM borrower b
+    JOIN user_account u ON b.id = u.id
+    JOIN credit c ON c.borrower_id = b.id
+    WHERE MONTH(c.date_first_payment_schedule) = MONTH(CURRENT_DATE())
+      AND YEAR(c.date_first_payment_schedule) = YEAR(CURRENT_DATE())
+    GROUP BY u.id
+    HAVING COUNT(c.id) >= 2
+) AS sub; - вывел 5 юзеров
+
+8.Найти пользователей, которые подали заявки на сумму более 1 000 000 KZT за последний месяц
+
+SELECT
+    u.id AS user_id,
+    u.email,
+    SUM(c.amount_to_pay) AS total_amount
+FROM borrower b
+JOIN user_account u ON b.id = u.id
+JOIN credit c ON c.borrower_id = b.id
+WHERE c.date_first_payment_schedule >= NOW() - INTERVAL 1 MONTH
+GROUP BY u.id, u.email
+HAVING SUM(c.amount_to_pay) > 1000000; - вывел 1 от 2025-04
+
+9.Сколько заявок было создано (где date_first_payment_scheduleуказан)?
+
+SELECT COUNT(*) AS total_credits
+FROM credit
+WHERE date_first_payment_schedule IS
+NOT NULL; - результат 57
+
+
+
