@@ -1,0 +1,157 @@
+логи запросов 
+
+а) создание сущности user-account
+
+date
+Thu, 29 May 2025 07:34:48 GMT
+URL:https://kz-solva-release-io-777-qa.kz.idfaws.com
+Действие: Авторизация пользователя
+
+
+Request URL
+https://kz-solva-release-io-777-qa.kz.idfaws.com/secure/rest/registration/step1/next
+Request method
+POST
+Status code
+200 OK
+Remote address
+172.30.70.47:443
+Referrer policy
+strict-origin-when-cross-origin
+
+Reguest payload
+{confirmConditions: true, confirmPrivacyPolicy: true, creditPurpose: "11",…}
+confirmConditions: true
+confirmPrivacyPolicy: true
+creditPurpose: "11"
+creditPurposes: 
+[{id: "4", value: "Погашение другого микрокредита"}, {id: "7", value: "Ремонт недвижимости"},…]
+email: "rozkevitcelena@gmail.kz"
+emailRewrited: null
+flowType: "BASE"
+homePhone: null
+mobilePhone: "+7(708)563-93-68"
+phoneConfirmationCode: "1111"
+secretWord: null
+
+ Responce
+{
+    "data": {
+        "confirmConditions": null,
+        "confirmPrivacyPolicy": null,
+        "creditPurpose": null,
+        "creditPurposes": null,
+        "email": null,
+        "emailRewrited": null,
+        "flowType": null,
+        "homePhone": null,
+        "mobilePhone": null,
+        "phoneConfirmationCode": null,
+        "secretWord": null
+    },
+    "exception": null,
+    "status": "OK_REDIRECT",
+    "url": "/registration/step2"
+}
+
+
+ б) создание сущности borrower
+date
+Thu, 29 May 2025 09:30:01 GMT
+URL https://kz-solva-release-io-777-qa.kz.idfaws.com/secure/rest/borrowers/56/
+Действия: оформление займа
+
+
+Request URL
+https://kz-solva-release-io-777-qa.kz.idfaws.com/secure/rest/borrowers/56/track/calc/STEP_NEW_CALC
+Request method
+POST
+Status code
+200 OK
+Remote address
+172.30.70.47:443
+Referrer policy
+strict-origin-when-cross-origin
+
+Responce
+{
+    "data": {
+        "affiliateMerchantEmail": null,
+        "affiliateMerchantId": null,
+        "affiliateMerchantName": null,
+        "email": "rozkevitcelena@gmail.kz",
+        "forcedChangePassword": false,
+        "userAccountId": 1019713,
+        "userId": 56,
+        "userName": "Александрова А."
+    },
+    "exception": null,
+    "status": "OK",
+    "url": null
+}
+
+
+
+
+ в) создание сущности credit
+
+date
+Thu, 29 May 2025 08:17:41 GMT
+URL:https://kz-solva-release-io-777-qa.kz.idfaws.com
+Действие: оформление кредита
+
+Request URL
+https://kz-solva-release-io-777-qa.kz.idfaws.com/secure/rest/registration/step-new-calculator/create-credit
+Request method
+POST
+Status code
+200 OK
+Remote address
+172.30.70.47:443
+Referrer policy
+strict-origin-when-cross-origin
+
+Reguest payload
+{money: 200000, periodInMonth: 60, period: 60, productId: 8083, idfProductId: 8083, hasInsurance: true,…}
+birthplace: "KZ"
+citizenship: "KZ"
+creditPurpose: "17"
+hasEsign: true
+hasInsurance: true
+idfProductId: 8083
+money: 200000
+offerConfirmationCode: "1111"
+period: 60
+periodInMonth: 60
+productId: 8083
+shiftFirstPaymentDay: null
+templateTypes: 
+["CREDIT", "PAYMENT_SCHEDULE", "QUESTIONNAIRE", "CREDIT_BUREAU", "ENPF", "INSURANCE",…]
+
+
+
+ г) логин в личный кабинет 
+
+date
+Thu, 29 May 2025 08:37:53 GMT
+URL:https://kz-solva-release-io-777-qa.kz.idfaws.com
+Действие: Вход в личный кабинет
+
+
+Request URL
+https://kz-solva-release-io-777-qa.kz.idfaws.com/secure/rest/authentication/login
+Request method
+POST
+Status code
+200 OK
+Remote address
+172.30.70.47:443
+Referrer policy
+strict-origin-when-cross-origin
+
+Reguest payload
+{login: "rozhkevitch.elena@yandex.ru", password: "El24ena@"}
+login: "rozhkevitch.elena@yandex.ru"
+password: "El24ena@"
+
+
