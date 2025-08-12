@@ -30,7 +30,7 @@
 ## 📜 Примеры работ
 - **Чек-лист:** [Тестирование формы регистрации](https://github.com/...)
 - **Тест-кейсы:** [Авторизация](https://github.com/...)
-- **Bug Report:** [Пример](https://github.com/...)
+- **Bug Report:** [Пример](https://github.com/ElenaVip83/Portfolio/blob/main/BugReports/PasswordValidationBug.docx)
 
 ---
 
